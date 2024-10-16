@@ -1,6 +1,29 @@
 import "./App.css";
+import { useEffect } from "react";
 
 const App = () => {
+	useEffect(() => {
+		const getMock = async () => {
+			try {
+				const mockResponse = await fetch(
+					"https://api.example.com/users"
+				);
+				const mockData = await mockResponse.json();
+
+				const donotMockResponse = await fetch(
+					"https://api.github.com/users/nitishn7"
+				);
+				const donotMockData = await donotMockResponse.json();
+
+				console.log("Mocked data:", mockData);
+				console.log("Non-mocked data:", donotMockData);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		};
+
+		getMock();
+	}, []);
 	return (
 		<div>
 			<form className="flex flex-col">
